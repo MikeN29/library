@@ -5,7 +5,6 @@ body {
 }
 
 #displayBooksDiv {
-  background-color: gray;
   height: 600px;
   display: flex;
   flex-wrap: wrap;
@@ -24,6 +23,7 @@ body {
 }
 
 #buttonDiv {
+  padding-top: 20px;
   text-align: center;
 }
 
@@ -45,6 +45,7 @@ body {
   position: fixed;
   top: 10%;
   right: 50%;
+
   border: 3px solid #f1f1f1;
   z-index: 9;
 }

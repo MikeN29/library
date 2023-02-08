@@ -1,7 +1,9 @@
 const titleInput = document.getElementById("title");
 const authorInput = document.getElementById("author");
 const pagesInput = document.getElementById("pages");
-const readInput = document.getElementById("isRead");
+
+//const readInput = document.querySelector("input[name=isRead]:checked").value; - not sure if required
+
 const displayBooksButton = document.getElementById("displayBooksButton");
 const addBookToLibraryButton = document.getElementById(
   "addBookToLibraryButton"
@@ -13,7 +15,7 @@ function Book(title, author, pages, isRead) {
   this.title = title;
   this.author = author;
   this.pages = pages;
-  this.isRead = false;
+  this.isRead = isRead;
 }
 
 addBookToLibraryButton.addEventListener(
@@ -23,7 +25,7 @@ addBookToLibraryButton.addEventListener(
       title: titleInput.value,
       author: authorInput.value,
       pages: pagesInput.value,
-      isRead: readInput.value,
+      isRead: document.querySelector("input[name=isRead]:checked").value,
     });
     console.log(mylibrary);
     document.getElementById("myForm").style.display = "none";
