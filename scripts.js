@@ -69,6 +69,13 @@ displayBooksButton.addEventListener(
       bookCard.appendChild(bookAuthor);
       bookCard.appendChild(bookPages);
       bookCard.appendChild(bookRead);
+
+      const removeButton = document.createElement("button");
+      removeButton.classList.add("removeButton");
+      removeButton.textContent = "Remove book from Library";
+
+      removeButton.setAttribute("data-index", "object" + [i]);
+      bookCard.appendChild(removeButton);
     }
   },
   false
@@ -89,3 +96,5 @@ closeButton.addEventListener(
   },
   false
 );
+
+//function to remove selected index from array
