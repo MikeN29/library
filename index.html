@@ -6,6 +6,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="styles.css" />
     <script src="scripts.js" defer></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,500;0,700;1,700&display=swap"
+      rel="stylesheet"
+    />
     <title>Library</title>
   </head>
   <body>
@@ -17,22 +23,27 @@
         <input type="text" id="author" name="author" /><br />
         <label for="pages">Number of Pages</label><br />
         <input type="number" id="pages" name="pages" min="0" /><br />
-        <!--check this as radio buttons not working properly-->
 
         <!-- <input type="radio" id="isRead" name="isRead" value="Yes" />
         <label for="isRead">Read</label>
         <input type="radio" id="isRead" name="isRead" value="No" />
         <label for="isRead">Not Read</label><br /> -->
 
-        <input type="radio" id="yesRead" name="isRead" value="Yes" />
+        <input type="radio" id="yesRead" name="isRead" value="Read" />
         <label for="yesRead">Read</label>
-        <input type="radio" id="notRead" name="isRead" value="No" checked />
+        <input
+          type="radio"
+          id="notRead"
+          name="isRead"
+          value="Not Read"
+          checked
+        />
         <label for="notRead">Not Read</label><br />
 
         <button id="addBookToLibraryButton" type="button" class="btn">
           Submit Book
         </button>
-        <button id="closeButton" class="btn cancel">Close</button>
+        <button id="closeButton" type="button" class="btn cancel">Close</button>
       </form>
     </div>
     <div id="buttonDiv">

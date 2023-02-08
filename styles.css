@@ -1,10 +1,14 @@
 body {
+  background-color: #59253a;
   margin: 0;
   width: 100%;
   height: 100%;
+  font-family: "Poppins", sans-serif;
 }
 
 #displayBooksDiv {
+  padding-top: 20px;
+  padding-left: 75px;
   height: 600px;
   display: flex;
   flex-wrap: wrap;
@@ -12,11 +16,13 @@ body {
 }
 
 .bookCard {
-  background-color: aqua;
+  background-color: #78244c;
+  color: white;
   width: 190px;
   height: 240px;
   text-align: center;
   border-radius: 20px;
+  font-size: 16px;
 }
 
 .bookTitleText {
@@ -29,12 +35,13 @@ body {
 
 /* Button used to open the contact form - fixed at the bottom of the page */
 .open-button {
-  background-color: #555;
+  background-color: #895061;
   color: white;
   padding: 16px 20px;
   border: none;
   cursor: pointer;
   opacity: 0.8;
+  font-size: 20px;
 
   width: 280px;
 }
@@ -46,7 +53,7 @@ body {
   top: 10%;
   right: 50%;
 
-  border: 3px solid #f1f1f1;
+  border: 3px solid #2d4159;
   z-index: 9;
 }
 
@@ -54,7 +61,8 @@ body {
 .form-container {
   width: 300px;
   padding: 10px;
-  background-color: white;
+  background-color: #2d4159;
+  color: white;
 }
 
 /* Full-width input fields */
@@ -64,18 +72,13 @@ body {
   padding: 15px;
   margin: 15px 0 22px 0;
   border: none;
-  background: #f1f1f1;
+  background: #0677a1;
+  color: white;
 }
 
 .form-container input[type="radio"] {
   padding: 15px;
   margin: 15px;
-}
-
-/* When the inputs get focus, do something */
-.form-container input {
-  background-color: #ddd;
-  outline: none;
 }
 
 /* Set a style for the submit/login button */

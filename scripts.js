@@ -5,6 +5,8 @@ const pagesInput = document.getElementById("pages");
 //const readInput = document.querySelector("input[name=isRead]:checked").value; - not sure if required
 
 const displayBooksButton = document.getElementById("displayBooksButton");
+const closeButton = document.getElementById("closeButton");
+
 const addBookToLibraryButton = document.getElementById(
   "addBookToLibraryButton"
 );
@@ -61,7 +63,7 @@ displayBooksButton.addEventListener(
       bookPages.innerText = mylibrary[i].pages + " pages";
 
       const bookRead = document.createElement("h3");
-      bookRead.innerText = "Has this book been read? " + mylibrary[i].isRead;
+      bookRead.innerText = mylibrary[i].isRead;
 
       bookCard.appendChild(bookTitle);
       bookCard.appendChild(bookAuthor);
@@ -80,7 +82,7 @@ openFormButton.addEventListener(
   false
 );
 
-displayBooksButton.addEventListener(
+closeButton.addEventListener(
   "click",
   function closeForm() {
     document.getElementById("myForm").style.display = "none";
