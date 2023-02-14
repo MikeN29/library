@@ -1,11 +1,13 @@
 const titleInput = document.getElementById("title");
 const authorInput = document.getElementById("author");
 const pagesInput = document.getElementById("pages");
+let bookTitleVar = "";
 
 //const readInput = document.querySelector("input[name=isRead]:checked").value; - not sure if required
 
 const displayBooksButton = document.getElementById("displayBooksButton");
 const closeButton = document.getElementById("closeButton");
+const updateLibraryButton = document.getElementById("updateLibraryButton");
 // const removeButton = document.querySelectorAll('[data-index="[i]"]');
 
 const addBookToLibraryButton = document.getElementById(
@@ -14,11 +16,23 @@ const addBookToLibraryButton = document.getElementById(
 
 let mylibrary = [];
 
-function Book(title, author, pages, isRead) {
+/*
+function book(title, author, pages, isRead, id) {
   this.title = title;
   this.author = author;
   this.pages = pages;
   this.isRead = isRead;
+  this.id = id;
+}*/
+
+class Book {
+  constructor(title, author, pages, isRead, id) {
+    this.title = title;
+    this.author = author;
+    this.pages = pages;
+    this.isRead = isRead;
+    this.id = id;
+  }
 }
 
 addBookToLibraryButton.addEventListener(
@@ -29,6 +43,7 @@ addBookToLibraryButton.addEventListener(
       author: authorInput.value,
       pages: pagesInput.value,
       isRead: document.querySelector("input[name=isRead]:checked").value,
+      id: mylibrary.length + 1,
     });
     console.log(mylibrary);
     document.getElementById("myForm").style.display = "none";
@@ -46,7 +61,6 @@ displayBooksButton.addEventListener(
 
       let bookCard = document.createElement("div");
 
-      // bookCard.setAttribute("id", "bookCard");
       let bookCardID = document.getElementById("bookCard");
 
       container.appendChild(bookCard);
@@ -71,27 +85,21 @@ displayBooksButton.addEventListener(
       bookCard.appendChild(bookPages);
       bookCard.appendChild(bookRead);
 
+      // const element = document.getatr(`"${i}"`);
+
       let bookTitleVar = mylibrary[i].title;
 
       //below works to remove book from array - need to add in a way to delete/remove the corresponding bookcard from view
-      let removeButton = `<button type='button' onclick='mylibrary.splice(mylibrary.findIndex((book) => book.title === "${bookTitleVar}"), 1);console.log(mylibrary)'>Remove book from Library</button>`;
+      let removeButton = `<button type='button' onclick='mylibrary.splice(mylibrary.findIndex((book) => book.title === "${bookTitleVar}"), 1);document.getElementById("${[
+        i,
+      ]}").style.display = "none";;console.log(mylibrary)'>Remove book from Library</button>`;
 
-      //const removeButton = document.createElement("button");
-      //removeButton.classList.add("removeButton");
-      removeButton.textContent = "Remove book from Library";
+      //let removeButton = `<button type='button' onclick='removeBookFromLibrary()' class='removeBook' >Remove book from Library</button>`;
 
-      bookCard.setAttribute("data-index", [i]);
+      // mylibrary.filter(book => book.title === "${bookTitleVar}").length > 0 ? container.removeChild(bookCard) : null
 
-      //removeButton.setAttribute("data-index", [i]);
-      //bookCard.appendChild(removeButton);
       bookCard.setAttribute("id", [i]);
-      //removeButton.setAttribute("id", [i]);
 
-      //removeButton.setAttribute("onclick", removeBookFromLibrary);
-
-      //removeButton.addEventListener("click", deleteBook);
-
-      //let closeBtn = `<button type='button' class='close-default' onclick='libraryBooks.splice(libraryBooks.findIndex((book) => book.title === "${bookTitle}" && book.author === "${bookAuthor}"), 1);'>x</button>`;
       const removeButtonDiv = document.createElement("div");
       bookCard.appendChild(removeButtonDiv);
 
@@ -101,14 +109,83 @@ displayBooksButton.addEventListener(
   false
 );
 
-//loop to assign the function to remove button
+//check if the index id exists in the mylibrary function - if it doesnt remove the element from the dom - if it does do nothing
 
-// function assignFunnctionToRemove(bookTitle) {
-//   const bookCardButton = document.getElementsByClassName("removeButon");
-//   for (let i = 0; i < bookCardButton.length; i++) {
-//     bookCardButton[i].onclick = deleteBook(bookTitle);
+// function deleteItem() {
+//   const bookItem = document.getElementsByClassName("bookCard");
+//   const removeButtonItem = document.getElementsByClassName("removeBook");
+//   for (let i = 0; i < bookItem.length; i++) {
+//     removeButtonItem[i].onclick = () => {
+//       //mylibrary.splice(bookItem[i], 1);
+//       bookItem[i].style.display = "none";
+
+//       //deleteDone();
+//     };
+//   }
+//   // for (let j = 0; j < mylibrary.length; j++) {
+//   //   mylibrary.splice(
+//   //     mylibrary.findIndex((book) => book.title === mylibrary[j].title),
+//   //     1
+//   //   );
+//   // }
+//   console.log(mylibrary);
+// }
+
+function removeBookFromLibrary() {
+  const bookItem = document.getElementsByClassName("bookCard");
+  const removeButtonItem = document.getElementsByClassName("removeBook");
+  for (let i = 0; i < bookItem.length; i++) {
+    removeButtonItem[i].onclick = () => {
+      //mylibrary.splice(bookItem[i], 1);
+      bookItem[i].style.display = "none";
+      bookItem[i].classList.add("delete");
+
+      //deleteDone();
+    };
+
+    console.log(mylibrary);
+  }
+
+  console.log(mylibrary);
+}
+
+// function deleteItem() {
+//   const bookItem = document.getElementsByClassName("bookCard");
+//   for (let i = 0; i < bookItem.length; i++) {
+//     bookItem[i].onclick = () => {
+//       //mylibrary.splice(bookItem[i], 1);
+//       bookItem[i].style.display = "none";
+//       //deleteDone();
+//     };
 //   }
 // }
+
+// function assignFunctionToRemove(e, bookTitleVar) {
+//   // for (var i = 0; i < mylibrary.length; i++) {
+//   //   if (mylibrary[i].title !== `'${bookTitleVar}'`) {
+//   console.log(bookTitleVar);
+//   //     break;
+//   //   }
+//   // }
+// }
+
+// function removeBookCard(bookTitleVar) {
+//   //bookCards[i].remove(bookCard);
+//   mylibrary.splice(
+//     mylibrary.findIndex((book) => book.title === bookTitleVar),
+//     1
+//   );
+//   // console.log("removebookcard function");
+//   // if (Book.title === bookTitleVar) {
+//   //   bookCards[i].remove(bookCard);
+//   // }
+// }
+
+updateLibraryButton.addEventListener(
+  "click",
+  function updateLibrary() {},
+  false
+);
 
 openFormButton.addEventListener(
   "click",
@@ -125,55 +202,3 @@ closeButton.addEventListener(
   },
   false
 );
-
-//this function removes the last element from the array
-
-function removeBookCard(bookTitle) {
-  //let bookTitle = document.querySelector(".bookTitleText");
-  // let i = mylibrary.findIndex((book) => book.index === id);
-  // mylibrary.splice(i, 1);
-  // console.log(mylibrary);
-  // console.log(id);
-
-  const bookCards = document.getElementsByClassName("bookCard");
-  for (let i = 0; i < bookCards.length; i++) {
-    bookCards[i].remove(bookCard);
-  }
-}
-
-//now i need to remove the dom element
-
-// function removeBookFromLibrary(mylibrary, id, i) {
-//   const bookCards = document.getElementsByClassName("bookCard");
-//   for (let i = 0; i < bookCards.length; i++) {
-//     bookCards[i].style.backgroundColor = "red";
-//   }
-// }
-
-// document.addEventListener("click", function (e) {
-//   const target = e.target.closest(".removeButton"); // Or any other selector.
-
-//   for (let i = 0; i < target.length; i++) {
-//     target[i].style.backgroundColor = "red";
-//   }
-
-//   if (target) {
-//     const bookCards = document.getElementsByClassName("bookCard");
-//     for (let i = 0; i < bookCards.length; i++) {
-//       bookCards[i].style.backgroundColor = "red";
-//     }
-//   }
-// });
-
-// function removeBookFromLibrary(mylibrary, id, i) {
-//   //const dataIndex = document.querySelectorAll("[data-index=[i]");
-
-//   const objWithIdIndex = mylibrary.findIndex((obj) => obj.i === i);
-
-//   if (objWithIdIndex > -1) {
-//     mylibrary.splice(objWithIdIndex, 1);
-//   }
-
-//   // return mylibrary;
-//   console.log("the index is" + i);
-// }
