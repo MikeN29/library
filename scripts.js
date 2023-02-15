@@ -16,35 +16,40 @@ const addBookToLibraryButton = document.getElementById(
 
 let mylibrary = [];
 
-/*
-function book(title, author, pages, isRead, id) {
+function Book(title, author, pages, isRead, id) {
   this.title = title;
   this.author = author;
   this.pages = pages;
   this.isRead = isRead;
   this.id = id;
-}*/
-
-class Book {
-  constructor(title, author, pages, isRead, id) {
-    this.title = title;
-    this.author = author;
-    this.pages = pages;
-    this.isRead = isRead;
-    this.id = id;
-  }
 }
+
+// addBookToLibraryButton.addEventListener(
+//   "click",
+//   function addBookToLibrary() {
+//     mylibrary.push({
+//       title: titleInput.value,
+//       author: authorInput.value,
+//       pages: pagesInput.value,
+//       isRead: document.querySelector("input[name=isRead]:checked").value,
+//       id: mylibrary.length + 1,
+//     });
+//     console.log(mylibrary);
+//     document.getElementById("myForm").style.display = "none";
+//   },
+
+//   false
+// );
 
 addBookToLibraryButton.addEventListener(
   "click",
-  function addBookToLibrary(book) {
-    mylibrary.push({
-      title: titleInput.value,
-      author: authorInput.value,
-      pages: pagesInput.value,
-      isRead: document.querySelector("input[name=isRead]:checked").value,
-      id: mylibrary.length + 1,
-    });
+  function addBookToLibrary() {
+    let title = titleInput.value;
+    let author = authorInput.value;
+    let pages = pagesInput.value;
+    let isRead = document.querySelector("input[name=isRead]:checked").value;
+    let newBook = new Book(title, author, pages, isRead);
+    mylibrary.push(newBook);
     console.log(mylibrary);
     document.getElementById("myForm").style.display = "none";
   },
@@ -90,96 +95,47 @@ displayBooksButton.addEventListener(
       let bookTitleVar = mylibrary[i].title;
 
       //below works to remove book from array - need to add in a way to delete/remove the corresponding bookcard from view
-      let removeButton = `<button type='button' onclick='mylibrary.splice(mylibrary.findIndex((book) => book.title === "${bookTitleVar}"), 1);document.getElementById("${[
+      let removeButton = `<button type='button' class="small-button" onclick='mylibrary.splice(mylibrary.findIndex((book) => book.title === "${bookTitleVar}"), 1);document.getElementById("${[
         i,
-      ]}").style.display = "none";;console.log(mylibrary)'>Remove book from Library</button>`;
+      ]}").style.display = "none";console.log(mylibrary)'>Remove book from Library</button>`;
 
-      //let removeButton = `<button type='button' onclick='removeBookFromLibrary()' class='removeBook' >Remove book from Library</button>`;
-
-      // mylibrary.filter(book => book.title === "${bookTitleVar}").length > 0 ? container.removeChild(bookCard) : null
+      let markReadButton = `<button type='button' class="small-button" onclick='markBookRead()'>Mark as Read</button>`;
 
       bookCard.setAttribute("id", [i]);
 
+      const markReadButtonDiv = document.createElement("div");
       const removeButtonDiv = document.createElement("div");
+
+      bookCard.appendChild(markReadButtonDiv);
       bookCard.appendChild(removeButtonDiv);
 
       removeButtonDiv.innerHTML = removeButton;
+      markReadButtonDiv.innerHTML = markReadButton;
     }
   },
   false
 );
 
-//check if the index id exists in the mylibrary function - if it doesnt remove the element from the dom - if it does do nothing
+// Add a button on each book’s display to change its read status.
 
-// function deleteItem() {
-//   const bookItem = document.getElementsByClassName("bookCard");
-//   const removeButtonItem = document.getElementsByClassName("removeBook");
-//   for (let i = 0; i < bookItem.length; i++) {
-//     removeButtonItem[i].onclick = () => {
-//       //mylibrary.splice(bookItem[i], 1);
-//       bookItem[i].style.display = "none";
+//     To facilitate this you will want to create the function that toggles a book’s read status on your Book prototype instance.
 
-//       //deleteDone();
-//     };
-//   }
-//   // for (let j = 0; j < mylibrary.length; j++) {
-//   //   mylibrary.splice(
-//   //     mylibrary.findIndex((book) => book.title === mylibrary[j].title),
-//   //     1
-//   //   );
-//   // }
+// function markBookRead(Book) {
+//   Book.prototype.toggleStatus = function () {
+//     this.isRead = true;
+//   };
+
+//   console.log(Book.prototype);
 //   console.log(mylibrary);
 // }
 
-function removeBookFromLibrary() {
-  const bookItem = document.getElementsByClassName("bookCard");
-  const removeButtonItem = document.getElementsByClassName("removeBook");
-  for (let i = 0; i < bookItem.length; i++) {
-    removeButtonItem[i].onclick = () => {
-      //mylibrary.splice(bookItem[i], 1);
-      bookItem[i].style.display = "none";
-      bookItem[i].classList.add("delete");
-
-      //deleteDone();
-    };
-
-    console.log(mylibrary);
-  }
-
-  console.log(mylibrary);
+function markBookRead(Book) {
+  this.Book.call(isRead);
 }
 
-// function deleteItem() {
-//   const bookItem = document.getElementsByClassName("bookCard");
-//   for (let i = 0; i < bookItem.length; i++) {
-//     bookItem[i].onclick = () => {
-//       //mylibrary.splice(bookItem[i], 1);
-//       bookItem[i].style.display = "none";
-//       //deleteDone();
-//     };
-//   }
-// }
-
-// function assignFunctionToRemove(e, bookTitleVar) {
-//   // for (var i = 0; i < mylibrary.length; i++) {
-//   //   if (mylibrary[i].title !== `'${bookTitleVar}'`) {
-//   console.log(bookTitleVar);
-//   //     break;
-//   //   }
-//   // }
-// }
-
-// function removeBookCard(bookTitleVar) {
-//   //bookCards[i].remove(bookCard);
-//   mylibrary.splice(
-//     mylibrary.findIndex((book) => book.title === bookTitleVar),
-//     1
-//   );
-//   // console.log("removebookcard function");
-//   // if (Book.title === bookTitleVar) {
-//   //   bookCards[i].remove(bookCard);
-//   // }
-// }
+Book.prototype.toggleStatus = function () {
+  this.isRead = true;
+};
 
 updateLibraryButton.addEventListener(
   "click",
