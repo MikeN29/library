@@ -88,9 +88,7 @@ displayBooksButton.addEventListener(
       bookCard.appendChild(bookTitle);
       bookCard.appendChild(bookAuthor);
       bookCard.appendChild(bookPages);
-      bookCard.appendChild(bookRead);
-
-      // const element = document.getatr(`"${i}"`);
+      //bookCard.appendChild(bookRead);
 
       let bookTitleVar = mylibrary[i].title;
 
@@ -101,9 +99,10 @@ displayBooksButton.addEventListener(
 
       let markReadButton = `<button type='button' class="small-button" onclick='markBookRead()'>Mark as Read</button>`;
 
-      bookCard.setAttribute("id", [i]);
+      // bookCard.setAttribute("id", index);
+      // bookCard.setAttribute("key", index);
 
-      const markReadButtonDiv = document.createElement("div");
+      //const markReadButtonDiv = document.createElement("div");
       const removeButtonDiv = document.createElement("div");
 
       bookCard.appendChild(markReadButtonDiv);
