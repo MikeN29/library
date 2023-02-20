@@ -13,22 +13,7 @@ const addBookToLibraryButton = document.getElementById(
   "addBookToLibraryButton"
 );
 
-let mylibrary = [
-  // {
-  //   title: "Harry Potter",
-  //   author: "JK Rowling",
-  //   pages: "700",
-  //   isRead: false,
-  //   id: 3423,
-  // },
-  // {
-  //   title: "Harry Potter and the Chamber of secrets",
-  //   author: "JK Rowling",
-  //   pages: "700",
-  //   isRead: false,
-  //   id: 2432,
-  // },
-];
+let mylibrary = [];
 
 function Book(title, author, pages, isRead) {
   this.title = title;
@@ -37,23 +22,6 @@ function Book(title, author, pages, isRead) {
   this.isRead = isRead;
   this.id = Math.floor(Math.random() * 10000);
 }
-
-// addBookToLibraryButton.addEventListener(
-//   "click",
-//   function addBookToLibrary() {
-//     mylibrary.push({
-//       title: titleInput.value,
-//       author: authorInput.value,
-//       pages: pagesInput.value,
-//       isRead: document.querySelector("input[name=isRead]:checked").value,
-//       id: mylibrary.length + 1,
-//     });
-//     console.log(mylibrary);
-//     document.getElementById("myForm").style.display = "none";
-//   },
-
-//   false
-// );
 
 addBookToLibraryButton.addEventListener(
   "click",
@@ -70,29 +38,40 @@ addBookToLibraryButton.addEventListener(
   false
 );
 
-/*
-function markRead(bookCard) {
-  const markReadDiv = document.createElement("div");
+Book.prototype.changeIsRead = function () {
+  this.isRead = !this.isRead;
+};
 
-  let markBookReadText = document.createElement("h3");
-  markBookReadText.innerHTML = "Read?";
-  markReadDiv.appendChild(markBookReadText);
+function changeIsRead(index) {
+  mylibrary[index].changeIsRead();
+  displayBooks();
+  console.log(mylibrary);
+}
 
-  const input = document.createElement("input");
-  input.type = "checkbox";
-  input.addEventListener("click", (e) => {
-    if (e.target.checked) {
-      bookCard.setAttribute("class", "book-read");
-      Book.isRead = true;
-      console.log(mylibrary);
-    } else {
-      bookCard.setAttribute("class", "book-not-read");
-      Book.isRead = false;
-      console.log(mylibrary);
-    }
-  });
-  markReadDiv.appendChild(input);
-}*/
+// function markRead(bookCard) {
+//   var bookCards = getElementsByClassName("bookCard");
+//   for (var i = 0; i < bookCards.length; i++) {}
+//   const markReadDiv = document.createElement("div");
+
+//   let markBookReadText = document.createElement("h3");
+//   markBookReadText.innerHTML = "Read?";
+//   markReadDiv.appendChild(markBookReadText);
+
+//   const input = document.createElement("input");
+//   input.type = "checkbox";
+//   input.addEventListener("click", (e) => {
+//     if (e.target.checked) {
+//       bookCard.setAttribute("class", "book-read");
+//       Book.isRead = true;
+//       console.log(mylibrary);
+//     } else {
+//       bookCard.setAttribute("class", "book-not-read");
+//       Book.isRead = false;
+//       console.log(mylibrary);
+//     }
+//   });
+//   markReadDiv.appendChild(input);
+// }
 
 displayBooksButton.addEventListener("click", displayBooks);
 
@@ -134,6 +113,32 @@ function displayBooks() {
     let deleteBookContent = `<button type='button' class="small-button" onclick='deleteBook(${i});console.log(mylibrary)'>Remove book from Library</button>`;
 
     removeButtonDiv.innerHTML = deleteBookContent;
+
+    const markReadDiv = document.createElement("div");
+    bookCard.appendChild(markReadDiv);
+
+    let markBookReadText = document.createElement("h3");
+    //markBookReadText.innerHTML = "Read?";
+    markReadDiv.appendChild(markBookReadText);
+
+    //const input = document.createElement("input");
+    //input.type = "checkbox";
+    let inputtext = `<input type="checkbox" onclick='changeIsRead(${i})'>`;
+    markReadDiv.innerHTML = inputtext;
+
+    //markReadDiv.appendChild(input);
+
+    // input.addEventListener("click", (e) => {
+    //   if (e.target.checked) {
+    //     bookCard.setAttribute("class", "book-read");
+    //     // Book.isRead = true;
+    //     console.log(mylibrary);
+    //   } else {
+    //     bookCard.setAttribute("class", "book-not-read");
+    //     // Book.isRead = false;
+    //     console.log(mylibrary);
+    //   }
+    // });
   }
 }
 
@@ -142,11 +147,11 @@ function deleteBook(index) {
   displayBooks();
 }
 
-updateLibraryButton.addEventListener(
-  "click",
-  function updateLibrary() {},
-  false
-);
+// updateLibraryButton.addEventListener(
+//   "click",
+//   function updateLibrary() {},
+//   false
+// );
 
 openFormButton.addEventListener(
   "click",
