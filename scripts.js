@@ -3,8 +3,6 @@ const authorInput = document.getElementById("author");
 const pagesInput = document.getElementById("pages");
 let bookTitleVar = "";
 
-//const readInput = document.querySelector("input[name=isRead]:checked").value; - not sure if required
-
 const displayBooksButton = document.getElementById("displayBooksButton");
 const closeButton = document.getElementById("closeButton");
 const updateLibraryButton = document.getElementById("updateLibraryButton");
@@ -48,31 +46,6 @@ function changeIsRead(index) {
   console.log(mylibrary);
 }
 
-// function markRead(bookCard) {
-//   var bookCards = getElementsByClassName("bookCard");
-//   for (var i = 0; i < bookCards.length; i++) {}
-//   const markReadDiv = document.createElement("div");
-
-//   let markBookReadText = document.createElement("h3");
-//   markBookReadText.innerHTML = "Read?";
-//   markReadDiv.appendChild(markBookReadText);
-
-//   const input = document.createElement("input");
-//   input.type = "checkbox";
-//   input.addEventListener("click", (e) => {
-//     if (e.target.checked) {
-//       bookCard.setAttribute("class", "book-read");
-//       Book.isRead = true;
-//       console.log(mylibrary);
-//     } else {
-//       bookCard.setAttribute("class", "book-not-read");
-//       Book.isRead = false;
-//       console.log(mylibrary);
-//     }
-//   });
-//   markReadDiv.appendChild(input);
-// }
-
 displayBooksButton.addEventListener("click", displayBooks);
 
 function displayBooks() {
@@ -99,59 +72,54 @@ function displayBooks() {
 
     const bookRead = document.createElement("h3");
     bookRead.innerHTML = mylibrary[i].isRead;
+    bookRead.innerHTML = mylibrary[i].isRead ? "Read" : "Not Read";
 
     bookCard.appendChild(bookTitle);
     bookCard.appendChild(bookAuthor);
     bookCard.appendChild(bookPages);
+    bookCard.appendChild(bookRead);
 
     bookCard.setAttribute("id", [i]);
 
     const removeButtonDiv = document.createElement("div");
-
-    bookCard.appendChild(removeButtonDiv);
 
     let deleteBookContent = `<button type='button' class="small-button" onclick='deleteBook(${i});console.log(mylibrary)'>Remove book from Library</button>`;
 
     removeButtonDiv.innerHTML = deleteBookContent;
 
     const markReadDiv = document.createElement("div");
-    bookCard.appendChild(markReadDiv);
 
     let markBookReadText = document.createElement("h3");
-    //markBookReadText.innerHTML = "Read?";
+
     markReadDiv.appendChild(markBookReadText);
 
-    //const input = document.createElement("input");
-    //input.type = "checkbox";
-    let inputtext = `<input type="checkbox" onclick='changeIsRead(${i})'>`;
+    let check = false;
+    let inputtext = `<button class="small-button" onclick='changeIsRead(${i})' name="isRead" value="isRead" >Mark Book Read</button>`;
     markReadDiv.innerHTML = inputtext;
 
-    //markReadDiv.appendChild(input);
-
-    // input.addEventListener("click", (e) => {
-    //   if (e.target.checked) {
-    //     bookCard.setAttribute("class", "book-read");
-    //     // Book.isRead = true;
-    //     console.log(mylibrary);
-    //   } else {
-    //     bookCard.setAttribute("class", "book-not-read");
-    //     // Book.isRead = false;
-    //     console.log(mylibrary);
-    //   }
-    // });
+    bookCard.appendChild(markReadDiv);
+    bookCard.appendChild(removeButtonDiv);
   }
 }
+
+// function checkedFunction() {
+//   let num = 0;
+//   num += 1;
+//   if (Book.isRead == true) {
+//     bookCard.setAttribute("class", "book-read");
+//     // Book.isRead = true;
+//     console.log(mylibrary);
+//   } else {
+//     bookCard.setAttribute("class", "book-not-read");
+//     // Book.isRead = false;
+//     console.log(mylibrary);
+//   }
+// }
 
 function deleteBook(index) {
   mylibrary.splice(index, 1);
   displayBooks();
 }
-
-// updateLibraryButton.addEventListener(
-//   "click",
-//   function updateLibrary() {},
-//   false
-// );
 
 openFormButton.addEventListener(
   "click",
