@@ -2,9 +2,12 @@
 
 Live Preview: https://miken29.github.io/library/
 
-Summary
+Outcomes:
 
--user can fill out a form inputting book details, this is stored in the mylibrary array
--user can click display books to view books
--Books can be removed from the array and display
--Books can be marked read
+-User can fill out a form inputting book details, this uses a object constructor and is stored in the mylibrary array.
+
+-User can click display books to view books.
+
+-Books can be removed from the array and display by using .splice and refreshing the displayBooks function.
+
+-I have created a prototype which changes the Books isRead property to the opposite. This means the book can be marked read.
